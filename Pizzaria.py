@@ -109,7 +109,7 @@ pedidos = [
     'entregador': 'fabio',
     'status': 'pendente',
     'valor': 25,
-    'codigo': '1234'
+    'codigo': 1234
   },
   {
     'cliente': 'igor',
@@ -121,7 +121,7 @@ pedidos = [
     'entregador': 'fabio',
     'status': 'pendente',
     'valor': 25,
-    'codigo': '1111'
+    'codigo': 1111
   } 
 ]
 
@@ -566,7 +566,7 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
           print("CPF inválido. Por favor, digite um CPF válido (11 dígitos)")
           return
 
-      info_tamanhos = input("Digite o tamanho da pizza (pequena, média ou grande): ")
+      info_tamanhos = input("Digite o tamanho da pizza: ")
       info_sabor = input("Digite o sabor da pizza: ")
       info_adicionais = input("Digite os adicionais da pizza (se houver): ")
 
@@ -651,7 +651,7 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
     return valor_pedido
 
   def gerar_codigo_pedido(self):
-    codigo = random.randint(1000, 9999)
+    codigo = int(random.randint(1000, 9999))
     return codigo
 
 
@@ -712,14 +712,14 @@ class Delivery:  # adicionar todas as listas utlizadas na classe delivery
 
   def finalizar_delivery(self): 
     cpf = input("Digite o CPF do cliente (apenas números): ")
-    codigo_pedido = input("Digite o código do pedido para finalizar o delivery: ")
+    codigo_pedido = int(input("Digite o código do pedido para finalizar o delivery: "))
     for pedido in self.pedidos[:]:  # Usando uma cópia da lista para evitar problemas de remoção durante a iteração
         if pedido['cpf'] == cpf and pedido['codigo'] == codigo_pedido:
             pedido['status'] = "Finalizado"
             self.pedidos.remove(pedido)
             print(f"Delivery do pedido {codigo_pedido} finalizado com sucesso!")
             return
-    print(f"Delivery do pedido {codigo_pedido} não encontrado.")a
+    print(f"Delivery do pedido {codigo_pedido} não encontrado.")
 
 
 
