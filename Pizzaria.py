@@ -151,8 +151,9 @@ class Pizzaria():
             print("-------------------------Menu Pizzaria-------------------------")
             print("por favor selecione uma das opções abaixo:")
             print("1 - cadastrar saldo do dia")
-            print("2 - Visualizar Armazem")
-            print("3 - Voltar ao Menu Principal")
+            print("2 - Visualizar saldo")
+            print("3 - Visualizar Armazem")
+            print("4- Voltar ao Menu Principal")
             opcao = int(input("Digite a opção desejada: "))
             if opcao == 1:
                 self.cadastrar_saldo()
@@ -198,7 +199,7 @@ class Pizzaria():
       print(f"Sabor: {sabor['nome']} - Preço: R${sabor['preco']:.2f}")
     print()
     for adicional in self.adicionais:
-      print(f"Adicional: {adicional['nome']} - Preço: R${adicional['preco']:.2f}")
+      print(f"Adicional: {adicional['nome']} - Quantidade disponível: {adicional['quantidade']} - Preço: R${adicional['preco']:.2f}")
             
 
 
@@ -309,7 +310,7 @@ class Pizza:
     print()
     print("-------------------------Tamanhos Cadastrados-------------------------")
     for tamanho in self.tamanhos:
-      print(f"Tamanho: {tamanho['nome']}, Multiplicador: {tamanho['multiplicador']}")
+      print(f"Tamanho: {tamanho['tipo']}, Multiplicador: {tamanho['multiplicador']}")
 
   def cadastrar_adicional(self):
     nome = input("Digite o nome do adicional: ")
