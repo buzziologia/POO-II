@@ -13,12 +13,30 @@ clientes = [
 
 funcionarios = [
   {
-    'nome': 'Bob',
+    'nome': 'bob',
     'cpf': '98765432100',
-    'cargo': 'Atendente',
+    'cargo': 'atendente',
     'salario': 1500.00,
     'telefone': '888888888',
     'email': 'bob@example.com',
+    'senha': 'senha123'
+  },
+  {  
+    'nome': 'fabio',
+    'cpf': '12345678912',
+    'cargo': 'entregador',
+    'salario': 1500.00,
+    'telefone': '888888888',
+    'email': 'fabio@example.com',
+    'senha': 'senha123'
+  },
+  {
+    'nome': 'sophia',
+    'cpf': '44455566699',
+    'cargo': 'gerente',
+    'salario': 1500.00,
+    'telefone': '888888888',
+    'email': 'sophia@example.com',
     'senha': 'senha123'
   }
 ]
@@ -26,7 +44,7 @@ funcionarios = [
 
 sabores = [
   {
-    'nome': 'Calabresa',
+    'nome': 'calabresa',
     'preco': 25.00
   }
 ]
@@ -34,33 +52,48 @@ sabores = [
 
 tamanhos = [
   {
-    'tipo': 'Pequena',
-    'multiplicador': 1
-  }
+    'tipo': 'pequena',
+   'multiplicador': 1
+  },
   {
-    'tipo': 'Média',
-    'multiplicador': 1.2
-  }
+    'tipo': 'media', 
+   'multiplicador': 1.2
+  },
   {
-    'tipo': 'Grande',
-    'multiplicador': 1.5
+    'tipo': 'grande',
+   'multiplicador': 1.5
   }
 ]
 
 adicionais = [
   {
-    'nome': 'Borda Recheada',
-    'preco': 5.00
+    'nome': 'guarana',
+    'preco': 5.00,
+    'quantidade': 25
+  },
+  {
+    'nome': 'pepsi',
+    'preco': 6.00,
+    'quantidade': 25
+  },
+  {
+    'nome': 'coca',
+    'preco': 7.00,
+    'quantidade': 25
   }
+  
 ]
 
 
 pedidos = [
   {
     'cliente': 'Alice',
-    'info_tamanhos': 'Pequena',
-    'info_sabor': 'Calabresa',
-    'info_adicionais': 'Borda Recheada'
+    'cpf': '12345678900',
+    'info_tamanhos': 'pequena',
+    'info_sabor': 'calabresa',
+    'info_adicionais': 'coca',
+    'quantidade_adicionais': 2
+    'entregador': 'fabio'
   }
 ]
 
@@ -73,17 +106,24 @@ deliverys = [
   }
 ]
 
+saldos = [
+  {
+    'dia': '2023-08-01',
+    'saldo': 1200.00
+  }
+]
+
 
 class Pizzaria():
   def __init__(self):
-    self.clientes = []
-    self.funcionarios = []
-    self.sabores = []
-    self.tamanhos = []
-    self.adicionais = []
-    self.pedidos = []
-    self.deliverys = []
-    self.ganhos = []
+    self.clientes = clientes
+    self.funcionarios = funcionarios
+    self.sabores = sabores
+    self.tamanhos = tamanhos
+    self.adicionais = adicionais
+    self.pedidos = pedidos
+    self.deliverys = deliverys
+    self.saldos = saldos
 
   def menu_pizzaria(self):
     opcao = 0
@@ -106,10 +146,6 @@ class Pizzaria():
             print("Opção inválida. Por favor, digite um número válido.")
 
   def saldo_pizzaria(self):
-    saldos = [
-      {'dia': '01/05/2024', 'saldo_diario': 1200},
-      # Adicione os saldos de cada dia aqui
-    ]
     print()
     print("-------------------------Saldo da Pizzaria-------------------------")
     print("Saldo da Pizzaria: R$", self.saldo)
@@ -118,17 +154,20 @@ class Pizzaria():
   def visualizar_armazem(self):
     print()
     print("-------------------------Armazem da Pizzaria-------------------------")
-    print("Sabores: ", self.sabores)
-    print("Tamanhos: ", self.tamanhos)
-    print("Adicionais: ", self.adicionais)
+    for sabor in self.sabores:
+      print(f"Sabor: {sabor['nome']} - Preço: R${sabor['preco']:.2f}")
     print()
+    for adicional in self.adicionais:
+      print(f"Adicional: {adicional['nome']} - Preço: R${adicional['preco']:.2f} - quantidade: {adicional['quantidade']}")
+      
 
 
 class Pizza:
-  def __init__(self, nome, preco, sabores):
+  def __init__(self, nome, preco, sabores, tamanhos):
     self.nome = nome
     self.preco = preco
-    self.sabores = []
+    self.sabores = sabores
+    self.tamanhos = tamanhos
 
   def menu_pizza(self):
     opcao = 0
@@ -140,7 +179,13 @@ class Pizza:
             print("1 - Cadastrar pizza")
             print("2 - Remover pizza")
             print("3 - Visualizar pizzas cadastradas")
-            print("4 - Voltar ao Menu Principal")
+            print("4 - Cadastrar tamanho")
+            print("5 - Remover tamannho")
+            print("6 - Visualizar tamanhos cadastrados")
+            print("7 - Cadastrar adicional")
+            print("8 - Remover adicional")
+            print("9 - Visualizar adicionais cadastrados")
+            print("10 - Voltar ao Menu Principal")
             opcao = int(input("Digite a opção desejada: "))
             if opcao == 1:
               pizza = self.cadastrar_pizza()
@@ -150,6 +195,18 @@ class Pizza:
             elif opcao == 3:
               self.visualizar_pizza()
             elif opcao == 4:
+              self.cadastrar_tamanho()
+            elif opcao == 5:
+              self.remover_tamanho()
+            elif opcao == 6:
+              self.visualizar_tamanho()
+            elif opcao == 7:
+              self.cadastrar_adicional()
+            elif opcao == 8:
+              self.remover_adicional()
+            elif opcao == 9:
+              self.visualizar_adicional()
+            elif opcao == 10:
               break    
             else:
               print("Opção inválida. Por favor, digite um número válido.")
@@ -178,10 +235,66 @@ class Pizza:
     print(f"Pizza de {nome} não encontrada.")
 
   def visualizar_pizza(self):
-    print("Pizzas cadastradas:")
+    print()
+    print("-------------------------Pizzas Cadastradas-------------------------")
     for pizza in self.sabores:
       print(f"Sabor: {pizza['nome']}, Preço: R${pizza['preco']:.2f}") 
 
+  def cadastrar_tamanho(self):
+    nome = input("Digite o nome do tamanho: ")
+    multiplicador = float(input("Digite o multiplicador do tamanho: "))
+
+    novo_tamanho = {
+      'nome': nome,
+      'multiplicador': multiplicador
+    }
+
+    self.tamanhos.append(novo_tamanho)
+    print(f"Tamanho {nome} cadastrado com sucesso!")
+
+  def remover_tamanho(self):
+    nome = input("Digite o nome do tamanho a ser removido: ")
+    for tamanho in self.tamanhos:
+      if tamanho['nome'] == nome:
+        self.tamanhos.remove(tamanho)
+        print(f"Tamanho {nome} removido com sucesso!")
+        return
+    print(f"Tamanho {nome} não encontrado.")
+
+  def visualizar_tamanho(self):
+    print()
+    print("-------------------------Tamanhos Cadastrados-------------------------")
+    for tamanho in self.tamanhos:
+      print(f"Tamanho: {tamanho['nome']}, Multiplicador: {tamanho['multiplicador']}")
+
+  def cadastrar_adicional(self):
+    nome = input("Digite o nome do adicional: ")
+    preco = float(input("Digite o preço do adicional: "))
+    quantidade = int(input("Digite a quantidade do adicional: "))
+
+    novo_adicional = {
+      'nome': nome,
+      'preco': preco,
+      'quantidade': quantidade
+    }
+
+    self.adicionais.append(novo_adicional)
+    print(f"Adicional {nome} cadastrado com sucesso!")
+
+  def remover_adicional(self):
+    nome = input("Digite o nome do adicional a ser removido: ")
+    for adicional in self.adicionais:
+      if adicional['nome'] == nome:
+        self.adicionais.remove(adicional)
+        print(f"Adicional {nome} removido com sucesso!")
+        return
+    print(f"Adicional {nome} não encontrado.")
+
+  def visualizar_adicional(self):
+    print()
+    print("-------------------------------------Adicionais-------------------------------------")
+    for adicional in self.adicionais:
+      print(f"Adicional: {adicional['nome']}, Preço: R${adicional['preco']:.2f}, Quantidade: {adicional['quantidade']}")
 
 
 class Funcionario:
@@ -193,7 +306,7 @@ class Funcionario:
     self.telefone = telefone
     self.email = email
     self.senha = senha
-    self.funcionarios = []
+    self.funcionarios = funcionarios
 
   def menu_funcionario(self):
     opcao = 0
@@ -253,10 +366,11 @@ class Funcionario:
     print(f"Funcionário com CPF {cpf} não encontrado.")
 
   def visualizar_funcionario(self):
-    print("Funcionários Cadastrados")
+    print()
+    print("-------------------------Funcionários Cadastrados-------------------------")
     for funcionario in self.funcionarios:
       print()
-      print(f"----------------- Dados de {funcionario['nome']} -----------------")
+      print(f"Dados do funcionário {funcionario['nome']} ")
       print(f"Nome: {funcionario['nome']}")
       print(f"CPF: {funcionario['cpf']}")
       print(f"Cargo: {funcionario['cargo']}")
@@ -275,7 +389,7 @@ class Cliente:
     self.numero = numero
     self.telefone = telefone
     self.email = email
-    self.clientes = []
+    self.clientes = clientes
 
   def menu_cliente(self):
     opcao = 0
@@ -308,17 +422,17 @@ class Cliente:
     print("-------------------------Cadastro de Cliente-------------------------")
     nome = input("Digite o nome do cliente: ")
 
-    cpf_existe = False  # Defina cpf_existe como False antes do loop
+    cpf_existe = True  # Defina cpf_existe como False antes do loop
 
     while True:
         cpf = input("Digite o CPF do cliente (apenas números): ")
         if len(cpf) == 11 and cpf.isdigit():
             for cliente in self.clientes:
                 if cliente['cpf'] == cpf:
-                    cpf_existe = True
+                    cpf_existe = False
                     print("CPF já cadastrado. Por favor, digite um CPF válido.")
                     break  
-            if not cpf_existe:
+            if cpf_existe:
                 break 
         else:
             print("CPF inválido. Por favor, digite um CPF válido (11 dígitos)")
@@ -352,10 +466,11 @@ class Cliente:
     print(f"Cliente com CPF {cpf} não encontrado.")
 
   def visualizar_clientes(self):
-    print("Clientes Cadastrados")
+    print()
+    print("-------------------------Clientes Cadastrados-------------------------")
     for cliente in self.clientes:
       print()
-      print(f"----------------- Dados de {cliente['nome']} -----------------")
+      print(f"Dados do cliente {cliente['nome']}")
       print(f"Nome: {cliente['nome']}")
       print(f"CPF: {cliente['cpf']}")
       print(f"Bairro: {cliente['bairro']}")
@@ -368,32 +483,32 @@ class Cliente:
 
 class Pedido:
   def __init__(self):
-    self.clientes = []
-    self.sabores = []
-    self.pedidos = []
+      self.clientes = clientes
+      self.sabores = sabores
+      self.tamanhos = tamanhos
+      self.adicionais = adicionais
+      self.pedidos = pedidos
 
   def menu_pedido(self):
-    opcao = 0
-    while True:
-        try:
-            print()
-            print("-------------------------Menu Pedidos-------------------------")
-            print("Por favor selecione uma das opções abaixo: ")
-            print("1 - Cadastrar pedido")
-            print("2 - Visualizar pedidos")
-            print("3 - Voltar ao Menu Principal")
-            opcao = int(input("Digite a opção desejada: "))
-            if opcao == 1:
-              pedido = self.cadastrar_pedido()
-              self.pedidos.append(pedido)
-            elif opcao == 2:
-              self.visualizar_pedido()
-            elif opcao == 3:
-              self.menu_pedido()
-            else:
-              print("Opção inválida. Por favor, digite um número entre 1 e 3.")
-        except ValueError:
-            print("Entrada inválida. Por favor, digite um número.")
+      while True:
+          try:
+              print()
+              print("-------------------------Menu Pedidos-------------------------")
+              print("Por favor selecione uma das opções abaixo: ")
+              print("1 - Cadastrar pedido")
+              print("2 - Visualizar pedidos")
+              print("3 - Voltar ao Menu Principal")
+              opcao = int(input("Digite a opção desejada: "))
+              if opcao == 1:
+                  self.cadastrar_pedido()
+              elif opcao == 2:
+                  self.visualizar_pedido()
+              elif opcao == 3:
+                  break
+              else:
+                  print("Opção inválida. Por favor, digite um número entre 1 e 3.")
+          except ValueError:
+              print("Entrada inválida. Por favor, digite um número.")
 
   def cadastrar_pedido(self):
     print()
@@ -402,7 +517,7 @@ class Pedido:
     if len(cpf) == 11 and cpf.isdigit():
         for cliente in self.clientes:
             if cliente['cpf'] == cpf:
-                break  
+                break
         else:
             print("CPF não encontrado.")
             print("Por favor, cadastre o cliente antes de fazer o pedido.")
@@ -415,34 +530,77 @@ class Pedido:
     info_sabor = input("Digite o sabor da pizza: ")
     info_adicionais = input("Digite os adicionais da pizza (se houver): ")
 
+    # Verificar se o adicional informado existe na lista de adicionais
+    adicional_existente = False
+    for adicional in self.adicionais:
+        if adicional['nome'] == info_adicionais:
+            adicional_existente = True
+            break
+
+    if not adicional_existente:
+        print("Adicional não encontrado. Por favor, escolha um adicional válido.")
+        return
+
+    quantidade_adicionais = int(input("Digite a quantidade de adicionais: "))
+    # Verificar se há quantidade suficiente de adicionais disponíveis
+    for adicional in self.adicionais:
+        if adicional['nome'] == info_adicionais:
+            if quantidade_adicionais <= adicional['quantidade']:
+                adicional['quantidade'] -= quantidade_adicionais
+                break
+            else:
+                print("Quantidade de adicionais insuficiente.")
+                return
+
+    entregador = input("Digite o nome do entregador (se houver): ")
+    
     novo_pedido = {
         'cliente': cliente,
+        'cpf': cpf,
         'info_tamanhos': info_tamanhos,
         'info_sabor': info_sabor,
         'info_adicionais': info_adicionais,
+        'quantidade_adicionais': quantidade_adicionais
+        'entregador': entregador
     }
+    
     self.pedidos.append(novo_pedido)
-    print(f"Pedido de {cliente} feito com sucesso!")
+    print("Pedido cadastrado com sucesso!")
+
 
   def visualizar_pedido(self):
-    print("Pedidos Cadastrados")
+    print()
+    print("-------------------------Pedidos Cadastrados-------------------------")
     for pedido in self.pedidos:
       print()
-      print(f"----------------- Dados de {pedido['cliente']} -----------------")
-      print(f"Nome: {pedido['cliente']['nome']}")
-      print(f"CPF: {pedido['cliente']['cpf']}")
+      print(f"Dados do pedido de {pedido['cliente']}")
+      print(f"Nome: {pedido['cliente']}")
+      print(f"CPF: {pedido['cpf']}")
       print(f"Tamanho: {pedido['info_tamanhos']}")
       print(f"Sabor: {pedido['info_sabor']}")
-      print(f"Adicionais: {pedido['info_adicionais']}")
-      print()
+      print(f"Adicionais: {pedido['info_adicionais']}, Quantidade: {pedido['quantidade_adicionais']}")
+      print(f"Entregador: {pedido['entregador']}")
 
-
+  def calcular_valor_pedido(self, pedido):
+    valor_pedido = 0
+    for sabor in self.sabores:
+        if sabor['nome'] == pedido['info_sabor']:
+            valor_pedido += sabor['preco']
+            break
+    for tamanho in self.tamanhos:
+        if tamanho['nome'] == pedido['info_tamanhos']:
+            valor_pedido = (valor_pedido*tamanho['preco'])
+            break
+    for adicional in self.adicionais:
+      
+    
+  
 class Delivery:
   def __init__(self, pedido, funcionario, status, deliverys):
     self.pedido = pedido
     self.funcioanrio = funcionario
     self.status = status
-    self.deliverys = []
+    self.deliverys = deliverys
 
   def menu_delivery(self):
     opcao = 0
@@ -521,7 +679,7 @@ def main():
                     pizzaria = Pizzaria()
                     pizzaria.menu_pizzaria()
                   elif opcao == 2:
-                    pizza = Pizza(None, None, sabores,)
+                    pizza = Pizza(None, None, sabores, tamanhos)
                     pizza.menu_pizza()
                   elif opcao == 3:
                     cliente = Cliente(None, None, None, None, None, None, None)
