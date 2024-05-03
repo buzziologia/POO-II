@@ -94,7 +94,7 @@ adicionais = [
     'preco': 7.00,
     'quantidade': 25
   }
-  
+
 ]
 
 
@@ -174,12 +174,12 @@ class Pizzaria(): # adicionar todas as listas utlizadas na classe pizzaria
   def cadastrar_saldo(self):
     dia = input("Digite o dia do saldo: ")
     saldo = float(input("Digite o saldo do dia: "))
-    
+
     novo_saldo = {
       'dia': dia,
       'saldo': saldo
     }
-    
+
     self.saldos.append({'dia': dia, 'saldo': saldo})
     print("Saldo cadastrado com sucesso!")
 
@@ -194,7 +194,7 @@ class Pizzaria(): # adicionar todas as listas utlizadas na classe pizzaria
       total += saldo['saldo']
     print()
     print(f"Total de saldos: R${total}")
-      
+
   def visualizar_armazem(self):
     print()
     print("-------------------------Armazem da Pizzaria-------------------------")
@@ -203,7 +203,7 @@ class Pizzaria(): # adicionar todas as listas utlizadas na classe pizzaria
     print()
     for adicional in self.adicionais:
       print(f"Adicional: {adicional['nome']} - Quantidade disponível: {adicional['quantidade']} - Preço: R${adicional['preco']:.2f}")
-            
+
 
 
 class Pizza:  # adicionar todas as listas utlizadas na classe pizza
@@ -231,8 +231,7 @@ class Pizza:  # adicionar todas as listas utlizadas na classe pizza
             print("10 - Voltar ao Menu Principal")
             opcao = int(input("Digite a opção desejada: "))
             if opcao == 1:
-              pizza = self.cadastrar_pizza()
-              self.sabores.append(pizza)
+              self.cadastrar_pizza()
             elif opcao == 2:
               self.remover_pizza()
             elif opcao == 3:
@@ -284,19 +283,19 @@ class Pizza:  # adicionar todas as listas utlizadas na classe pizza
     print("-------------------------Pizzas Cadastradas-------------------------")
     for pizza in self.sabores:
       print(f"Sabor: {pizza['nome']} - Preço: R${pizza['preco']:.2f}")
-      
-      
+
+
   def cadastrar_tamanho(self):
-    nome = input("Digite o nome do tamanho: ")
+    tipo = input("Digite o nome do tamanho: ")
     multiplicador = float(input("Digite o multiplicador do tamanho: "))
 
     novo_tamanho = {
-      'nome': nome,
+      'tipo': tipo,
       'multiplicador': multiplicador
     }
 
     self.tamanhos.append(novo_tamanho)
-    print(f"Tamanho {nome} cadastrado com sucesso!")
+    print(f"Tamanho {tipo} cadastrado com sucesso!")
 
     return novo_tamanho
 
@@ -398,7 +397,7 @@ class Funcionario:  # adicionar todas as listas utlizadas na classe funcionario
     }
 
     print(f"Funcionário {nome} cadastrado com sucesso!")
-    
+
     return novo_funcionario
 
   def remover_funcionario(self):
@@ -442,8 +441,7 @@ class Cliente:  # adicionar todas as listas utlizadas na classe cliente
         print("4 - Voltar ao Menu Principal")
         opcao = int(input("Digite a opção desejada: "))
         if opcao == 1:
-          cliente = self.cadastrar_cliente()
-          self.clientes.append(cliente)
+          self.cadastrar_clientes()
         elif opcao == 2:
           self.remover_clientes()
         elif opcao == 3:
@@ -455,7 +453,7 @@ class Cliente:  # adicionar todas as listas utlizadas na classe cliente
       except ValueError:
         print("Entrada inválida. Por favor, digite um número.")
 
-  def cadastrar_cliente(self):
+  def cadastrar_clientes(self):
     print()
     print("-------------------------Cadastro de Cliente-------------------------")
     nome = input("Digite o nome do cliente: ")
@@ -584,7 +582,7 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
           return
 
       quantidade_adicionais = int(input("Digite a quantidade de adicionais: "))
-      
+
       for adicional in self.adicionais:
           if adicional['nome'] == info_adicionais:
               if quantidade_adicionais <= adicional['quantidade']:
@@ -600,7 +598,7 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
                                          info_adicionais, quantidade_adicionais)
 
       codigo = self.gerar_codigo_pedido()
-      
+
       novo_pedido = {
           'cliente': cliente,
           'cpf': cpf,
@@ -613,7 +611,7 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
           'valor': valor,
           'codigo': codigo
       }
-    
+
       self.pedidos.append(novo_pedido)
       print("Pedido cadastrado com sucesso!")
 
@@ -635,7 +633,7 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
       print(f"Código: {pedido['codigo']}")
       print()
 
-  
+
   def calcular_valor_pedido(self, sabor, tamanho, adicional, quantidade_adicionais):
     valor_pedido = 0
     for sab in self.sabores:
@@ -655,8 +653,8 @@ class Pedido:  # adicionar todas as listas utlizadas na classe pedido
   def gerar_codigo_pedido(self):
     codigo = random.randint(1000, 9999)
     return codigo
-    
-    
+
+
 class Delivery:  # adicionar todas as listas utlizadas na classe delivery
   def __init__(self):
       self.pedidos = pedidos
@@ -685,7 +683,7 @@ class Delivery:  # adicionar todas as listas utlizadas na classe delivery
         except ValueError:
             print("Entrada inválida. Por favor, digite um número.")
 
-  
+
   def visualizar_delivery(self):
     print()
     print("-------------------------Deliverys Cadastrados-------------------------")
@@ -703,7 +701,7 @@ class Delivery:  # adicionar todas as listas utlizadas na classe delivery
         print(f"Status: {pedido['status']}")
         print(f"Valor: R${pedido['valor']:.2f}")
         print()
-    
+
 
   def obter_endereco_cliente(self, nome_cliente):
       for cliente in self.clientes:
@@ -721,7 +719,7 @@ class Delivery:  # adicionar todas as listas utlizadas na classe delivery
             self.pedidos.remove(pedido)
             print(f"Delivery do pedido {codigo_pedido} finalizado com sucesso!")
             return
-    print(f"Delivery do pedido {codigo_pedido} não encontrado.")
+    print(f"Delivery do pedido {codigo_pedido} não encontrado.")a
 
 
 
