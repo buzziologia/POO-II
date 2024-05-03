@@ -1,4 +1,6 @@
 import random
+# abaixo se encontram todas as listas utilizadas durante o uso do sistema, contendo:
+# clientes, funcionarios, sabores, tamanhos, adicionais, pedidos e saldos
 
 clientes = [
   {
@@ -132,8 +134,11 @@ saldos = [
   }
 ]
 
+# fim das listas de interação com o sistema
 
-class Pizzaria():
+# incio das classes
+
+class Pizzaria(): # adicionar todas as listas utlizadas na classe pizzaria
   def __init__(self):
     self.clientes = clientes
     self.funcionarios = funcionarios
@@ -143,7 +148,7 @@ class Pizzaria():
     self.pedidos = pedidos
     self.saldos = saldos
 
-  def menu_pizzaria(self):
+  def menu_pizzaria(self): #menu secundario
     opcao = 0
     while True:
         try:
@@ -190,8 +195,6 @@ class Pizzaria():
     print()
     print(f"Total de saldos: R${total}")
       
-    
-
   def visualizar_armazem(self):
     print()
     print("-------------------------Armazem da Pizzaria-------------------------")
@@ -203,13 +206,13 @@ class Pizzaria():
             
 
 
-class Pizza:
+class Pizza:  # adicionar todas as listas utlizadas na classe pizza
   def __init__(self):
     self.sabores = sabores
     self.tamanhos = tamanhos
     self.adicionais = adicionais
 
-  def menu_pizza(self):
+  def menu_pizza(self): #menu secundario
     opcao = 0
     while True:
         try:
@@ -345,11 +348,11 @@ class Pizza:
 
 
 
-class Funcionario:
+class Funcionario:  # adicionar todas as listas utlizadas na classe funcionario
   def __init__(self):
     self.funcionarios = funcionarios
 
-  def menu_funcionario(self):
+  def menu_funcionario(self): #menu secundario
     opcao = 0
     while True:
       try:
@@ -422,11 +425,11 @@ class Funcionario:
       print()
 
 
-class Cliente:
+class Cliente:  # adicionar todas as listas utlizadas na classe cliente
   def __init__(self):
     self.clientes = clientes
 
-  def menu_cliente(self):
+  def menu_cliente(self): #menu secundario
     opcao = 0
     while True:
       try:
@@ -518,7 +521,7 @@ class Cliente:
       print()
 
 
-class Pedido:
+class Pedido:  # adicionar todas as listas utlizadas na classe pedido
   def __init__(self):
       self.clientes = clientes
       self.sabores = sabores
@@ -526,7 +529,7 @@ class Pedido:
       self.adicionais = adicionais
       self.pedidos = pedidos
 
-  def menu_pedido(self):
+  def menu_pedido(self): #menu secundario
     opcao = 0
     while True:
       try:
@@ -654,13 +657,13 @@ class Pedido:
     return codigo
     
     
-class Delivery:
+class Delivery:  # adicionar todas as listas utlizadas na classe delivery
   def __init__(self):
       self.pedidos = pedidos
       self.funcionarios = funcionarios
       self.clientes = clientes
 
-  def menu_delivery(self):
+  def menu_delivery(self): #menu secundario
     opcao = 0
     while True:
         try:
@@ -722,8 +725,8 @@ class Delivery:
 
 
 
-#inicio do codigo em si
-def main():
+
+def main(): #menu principal - main do sistema, responsavel por perdir acesso a todos os menus secundários
   while True:
     try:
       print("Bem vindo a Pizzaria")
